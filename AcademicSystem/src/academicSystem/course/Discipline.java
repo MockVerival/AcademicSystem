@@ -1,22 +1,39 @@
 package academicSystem.course;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import academicSystem.people.*;
 
+@Entity
 public class Discipline {
+	@Id
+	@GeneratedValue
 	private long id;
 	private int code;
+	private String name;
 	private int credits;
 	private int period;
 	private String classroom;
-	private List<Discipline> requirements;
+	@OneToMany
+	private List<Discipline> requirements = new ArrayList<>();
+	@ManyToOne
 	private Course course;
+	@ManyToOne
 	private Teacher teacher;
-	private List<Student> students;
+	@ManyToMany
+	private List<Student> students = new ArrayList<>();
 	
-	public Discipline(Course course) {
+	public Discipline(Course course, int code) {
 		this.course = course;
+		this.code = code;
 	}
 
 	public long getId() {
@@ -29,6 +46,14 @@ public class Discipline {
 
 	public void setCode(int code) {
 		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getCredits() {
@@ -59,8 +84,8 @@ public class Discipline {
 		return requirements;
 	}
 
-	public void setRequirements(List<Discipline> requirements) {
-		this.requirements = requirements;
+	public void addRequirement(Discipline requirement) {
+		this.requirements.add(requirement);
 	}
 
 	public Course getCourse() {

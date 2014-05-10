@@ -1,15 +1,23 @@
 package academicSystem.people;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import academicSystem.course.Discipline;
 import academicSystem.course.DisciplineInterface;
 import academicSystem.library.Book;
 import academicSystem.library.BookInterface;
 
+@Entity
+@PrimaryKeyJoinColumn (name = "id")
 public class Teacher extends Employee implements BookInterface, DisciplineInterface {
 	protected int maxCredits;
-	protected List<Discipline> disciplines;
+	@OneToMany
+	protected List<Discipline> disciplines = new ArrayList<>();
 	
 	public Teacher() {
 

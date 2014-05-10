@@ -1,6 +1,12 @@
 package academicSystem.people;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import academicSystem.course.Course;
 import academicSystem.course.Discipline;
@@ -8,13 +14,18 @@ import academicSystem.course.DisciplineInterface;
 import academicSystem.library.Book;
 import academicSystem.library.BookInterface;
 
-public class Student extends Entity implements BookInterface, DisciplineInterface {
+@Entity
+@PrimaryKeyJoinColumn (name = "id")
+public class Student extends Person implements BookInterface, DisciplineInterface {
 	protected int period;
 	protected double income;
+	@ManyToOne
 	protected Course course;
-	protected List<Discipline> disciplines;
+	@ManyToMany
+	protected List<Discipline> disciplines = new ArrayList<>();
 	
 	public Student(Course course) {
+		super();
 		this.course = course;
 	}
 

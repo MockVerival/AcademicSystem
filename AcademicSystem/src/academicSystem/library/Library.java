@@ -1,28 +1,34 @@
 package academicSystem.library;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Library {
-	private List<Book> borrowedBooks;
-	private List<Book> availableBooks;
+	@Id
+	@GeneratedValue
+	private long id;
+	@OneToMany
+	private List<Book> books = new ArrayList<>();;
 
 	public Library() {
 
 	}
 
-	public List<Book> getBorrowedBooks() {
-		return borrowedBooks;
+	public long getId() {
+		return id;
 	}
 
-	public void setBorrowedBooks(List<Book> borrowedBooks) {
-		this.borrowedBooks = borrowedBooks;
+	public List<Book> getBooks() {
+		return books;
 	}
 
-	public List<Book> getAvailableBooks() {
-		return availableBooks;
-	}
-
-	public void setAvailableBooks(List<Book> availableBooks) {
-		this.availableBooks = availableBooks;
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 }

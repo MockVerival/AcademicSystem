@@ -1,10 +1,15 @@
 package academicSystem.people;
 
-public class Employee extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn (name = "id")
+public abstract class Employee extends Person {
 	protected double salary;
 
 	public Employee() {
-
+		super();
 	}
 
 	public double getSalary() {

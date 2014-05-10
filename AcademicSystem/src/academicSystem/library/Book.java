@@ -1,11 +1,20 @@
 package academicSystem.library;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Book {
+	@Id
+	@GeneratedValue
 	private long id;
 	private int code;
 	private String title;
 	private String author;
 	private String status;
+	@ManyToOne
 	private Library library;
 
 	public Book(Library library) {

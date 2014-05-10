@@ -1,20 +1,31 @@
 package academicSystem.course;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import academicSystem.people.Student;
 
+@Entity
 public class Course implements DisciplineInterface {
+	@Id
+	@GeneratedValue
 	private long id;
 	private String name;
 	private int credits;
 	private int periods;
 	private int code;
-	private List<Student> students;
-	private List<Discipline> disciplines;
+	@OneToMany
+	private List<Student> students = new ArrayList<>();
+	@OneToMany
+	private List<Discipline> disciplines = new ArrayList<>();
 
-	public Course() {
-
+	public Course(int code) {
+		this.code = code;
 	}
 
 	public long getId() {

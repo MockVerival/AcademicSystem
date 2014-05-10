@@ -1,6 +1,16 @@
 package academicSystem.people;
 
-public abstract class Entity {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance (strategy = InheritanceType.JOINED)
+public abstract class Person {
+	@Id
+	@GeneratedValue
 	protected long id;
 	protected int registration;
 	protected String name;
@@ -8,7 +18,7 @@ public abstract class Entity {
 	protected String phone;
 	protected String email;
 	
-	public Entity() {
+	public Person() {
 
 	}
 	
