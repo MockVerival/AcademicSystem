@@ -5,9 +5,11 @@ public class Book {
 	private int code;
 	private String title;
 	private String author;
+	private String status;
+	private Library library;
 
-	public Book() {
-
+	public Book(Library library) {
+		this.library = library;
 	}
 	
 	public long getId() {
@@ -36,5 +38,17 @@ public class Book {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Library getLibrary() {
+		return library;
 	}
 }

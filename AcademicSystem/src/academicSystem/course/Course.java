@@ -1,11 +1,17 @@
 package academicSystem.course;
 
-public class Course {
+import java.util.List;
+
+import academicSystem.people.Student;
+
+public class Course implements DisciplineInterface {
 	private long id;
 	private String name;
 	private int credits;
 	private int periods;
 	private int code;
+	private List<Student> students;
+	private List<Discipline> disciplines;
 
 	public Course() {
 
@@ -45,5 +51,21 @@ public class Course {
 
 	public void setCode(int code) {
 		this.code = code;
+	}
+
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void addStudent(Student student) {
+		this.students.add(student);
+	}
+
+	public List<Discipline> getDisciplines() {
+		return this.disciplines;
+	}
+
+	public void addDiscipline(Discipline discipline) {
+		this.disciplines.add(discipline);
 	}
 }

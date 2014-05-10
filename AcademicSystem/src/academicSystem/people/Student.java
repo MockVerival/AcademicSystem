@@ -2,16 +2,20 @@ package academicSystem.people;
 
 import java.util.List;
 
+import academicSystem.course.Course;
+import academicSystem.course.Discipline;
+import academicSystem.course.DisciplineInterface;
 import academicSystem.library.Book;
 import academicSystem.library.BookInterface;
 
-public class Student extends Entity implements BookInterface {
+public class Student extends Entity implements BookInterface, DisciplineInterface {
 	protected int period;
 	protected double income;
-	protected int maxCredits;
+	protected Course course;
+	protected List<Discipline> disciplines;
 	
-	public Student() {
-
+	public Student(Course course) {
+		this.course = course;
 	}
 
 	public int getPeriod() {
@@ -30,14 +34,10 @@ public class Student extends Entity implements BookInterface {
 		this.income = income;
 	}
 
-	public int getMaxCredits() {
-		return maxCredits;
+	public Course getCourse() {
+		return course;
 	}
-
-	public void setMaxCredits(int maxCredits) {
-		this.maxCredits = maxCredits;
-	}
-
+	
 	@Override
 	public void getBooks(List<Book> books) {
 		
@@ -46,5 +46,15 @@ public class Student extends Entity implements BookInterface {
 	@Override
 	public void returnBooks(List<Book> books) {
 		
+	}
+
+	@Override
+	public void addDiscipline(Discipline discipline) {
+		this.disciplines.add(discipline);
+	}
+
+	@Override
+	public List<Discipline> getDisciplines() {
+		return this.disciplines;
 	}
 }
