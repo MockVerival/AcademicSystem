@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -20,8 +22,9 @@ public class Student extends Person implements BookInterface, DisciplineInterfac
 	protected int period;
 	protected double income;
 	@ManyToOne
+	@JoinColumn(name="course_id")
 	protected Course course;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "students")
 	protected List<Discipline> disciplines = new ArrayList<>();
 	
 	public Student(Course course) {

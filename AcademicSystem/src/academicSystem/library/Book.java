@@ -3,6 +3,7 @@ package academicSystem.library;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,6 +16,7 @@ public class Book {
 	private String author;
 	private String status;
 	@ManyToOne
+	@JoinColumn(name="library_id")
 	private Library library;
 
 	public Book(Library library) {

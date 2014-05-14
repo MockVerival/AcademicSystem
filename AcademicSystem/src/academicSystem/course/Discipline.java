@@ -3,9 +3,13 @@ package academicSystem.course;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -25,10 +29,16 @@ public class Discipline {
 	@OneToMany
 	private List<Discipline> requirements = new ArrayList<>();
 	@ManyToOne
+	@JoinColumn(name="course_id")
 	private Course course;
 	@ManyToOne
+	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Discipline_Student", joinColumns = { 
+			@JoinColumn(name = "Discipline_id", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "Student_id", 
+			nullable = false, updatable = false) })
 	private List<Student> students = new ArrayList<>();
 	
 	public Discipline(Course course, int code) {

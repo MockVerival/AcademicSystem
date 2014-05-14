@@ -3,7 +3,9 @@ package academicSystem.people;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -16,7 +18,7 @@ import academicSystem.library.BookInterface;
 @PrimaryKeyJoinColumn (name = "id")
 public class Teacher extends Employee implements BookInterface, DisciplineInterface {
 	protected int maxCredits;
-	@OneToMany
+	@OneToMany(mappedBy = "teacher", targetEntity = Discipline.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	protected List<Discipline> disciplines = new ArrayList<>();
 	
 	public Teacher() {
