@@ -1,4 +1,4 @@
-package academicSystem.tests.people;
+package academicSystem.tests.jmock.people;
 
 import static org.junit.Assert.*;
 

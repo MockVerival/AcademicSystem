@@ -26,8 +26,9 @@ public class Course implements DisciplineInterface {
 	@OneToMany(mappedBy = "course", targetEntity = Discipline.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Discipline> disciplines = new ArrayList<>();
 
-	public Course(int code) {
+	public Course(int code, int credits) {
 		this.code = code;
+		this.credits = credits;
 	}
 
 	public long getId() {
@@ -55,7 +56,10 @@ public class Course implements DisciplineInterface {
 	}
 
 	public void setPeriods(int periods) {
-		this.periods = periods;
+		if(periods == 8 || periods == 10)
+			this.periods = periods;
+		else
+			System.out.println("Este não é um valor válido de períodos!");
 	}
 
 	public int getCode() {
@@ -79,6 +83,19 @@ public class Course implements DisciplineInterface {
 	}
 
 	public void addDiscipline(Discipline discipline) {
-		this.disciplines.add(discipline);
+		if(getTotalCredits() + discipline.getCredits() > this.credits)
+			System.out.println("Creditos do curso excedidos!");
+		else
+			this.disciplines.add(discipline);
+	}
+	
+	private int getTotalCredits() {
+		int totalCredits = 0;
+		
+		for(Discipline discipline : this.disciplines) {
+			totalCredits+=discipline.getCredits();
+		}
+		
+		return totalCredits;
 	}
 }

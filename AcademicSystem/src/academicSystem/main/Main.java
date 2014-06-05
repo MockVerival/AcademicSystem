@@ -14,8 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Projeto Inicial");
 		
-		Course course = new Course(1);
-		course.setCredits(240);
+		Course course = new Course(1,240);
 		course.setName("Engenharia de Software");
 		course.setPeriods(10);
 		

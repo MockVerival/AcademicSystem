@@ -71,7 +71,10 @@ public class Discipline {
 	}
 
 	public void setCredits(int credits) {
-		this.credits = credits;
+		if(credits == 2 || credits == 4 || credits == 5 || credits == 6 || credits == 14)
+			this.credits = credits;
+		else
+			System.out.println("Valor inválido de créditos!");
 	}
 
 	public int getPeriod() {
