@@ -22,15 +22,11 @@ public class Teacher extends Employee implements BookInterface, DisciplineInterf
 	protected List<Discipline> disciplines = new ArrayList<>();
 	
 	public Teacher() {
-
+		super();
 	}
 
 	public int getCredits() {
 		return credits;
-	}
-
-	public void setCredits(int credits) {
-		this.credits = credits;
 	}
 	
 	@Override
@@ -40,7 +36,10 @@ public class Teacher extends Employee implements BookInterface, DisciplineInterf
 
 	@Override
 	public void addDiscipline(Discipline discipline) {
-		this.disciplines.add(discipline);
+		if(!(this.credits+discipline.getCredits() > 12)) {
+			this.disciplines.add(discipline);
+			this.credits += discipline.getCredits();
+		}
 	}
 
 	@Override
