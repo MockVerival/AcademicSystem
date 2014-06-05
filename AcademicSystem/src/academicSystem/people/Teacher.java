@@ -17,7 +17,7 @@ import academicSystem.library.BookInterface;
 @Entity
 @PrimaryKeyJoinColumn (name = "id")
 public class Teacher extends Employee implements BookInterface, DisciplineInterface {
-	protected int maxCredits;
+	protected int credits;
 	@OneToMany(mappedBy = "teacher", targetEntity = Discipline.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	protected List<Discipline> disciplines = new ArrayList<>();
 	
@@ -25,12 +25,12 @@ public class Teacher extends Employee implements BookInterface, DisciplineInterf
 
 	}
 
-	public int getMaxCredits() {
-		return maxCredits;
+	public int getCredits() {
+		return credits;
 	}
 
-	public void setMaxCredits(int maxCredits) {
-		this.maxCredits = maxCredits;
+	public void setCredits(int credits) {
+		this.credits = credits;
 	}
 	
 	@Override
