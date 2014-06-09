@@ -71,4 +71,18 @@ public class Student extends Person implements BookInterface, DisciplineInterfac
 	public List<Discipline> getDisciplines() {
 		return this.disciplines;
 	}
+	
+	public int periodsMissing(){
+		return course.getPeriods() - period;
+	}
+	
+	public int getCreditsCoursed(){
+		int creditsCoursed = 0;
+		
+		for(Discipline discipline : disciplines){
+			creditsCoursed += discipline.getCredits();
+		}
+		
+		return creditsCoursed;
+	}
 }
