@@ -18,6 +18,7 @@ public class CourseTest {
 		
 		Discipline disciplineMock = EasyMock.createMock(Discipline.class);
 		EasyMock.expect(disciplineMock.getCredits()).andReturn(2);
+		EasyMock.replay(disciplineMock);
 		
 		course.addDiscipline(disciplineMock);
 		assertEquals(course.getDisciplines().size(), 1);
