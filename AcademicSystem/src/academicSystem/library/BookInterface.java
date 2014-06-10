@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface BookInterface {
 	
-	public void getBooks(List<Book> books);
-	public void returnBooks(List<Book> books);
+	public List<Book> getBooks();
+	public void addBook(Book book);
+	public void returnBook(Book book);
 }

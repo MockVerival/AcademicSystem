@@ -1,7 +1,6 @@
 package academicSystem.tests.jmock.people;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -11,6 +10,7 @@ import org.junit.Test;
 
 import academicSystem.course.Course;
 import academicSystem.course.Discipline;
+import academicSystem.library.Book;
 import academicSystem.people.Student;
 
 public class StudentTest {
@@ -33,7 +33,7 @@ public class StudentTest {
         
         Student student = new Student(mockCourse);
         int actualValue = student.periodsMissing();
-        assertSame(expectedValue, actualValue);
+        assertEquals(expectedValue, actualValue);
 	}
 	
 	@Test
@@ -53,4 +53,53 @@ public class StudentTest {
 		assertEquals(4, quantCredits);
 	}
 
+	@Test
+	public void testAddBookValid() {
+		final Course courseMock = context.mock(Course.class);
+		Student student = new Student(courseMock);
+		
+		final Book bookMock = context.mock(Book.class);
+		
+		context.checking(new Expectations() {{
+            oneOf (bookMock).getStatus();
+            will(returnValue("Disponível"));
+        }});
+		
+		student.addBook(bookMock);
+		assertEquals(student.getBooks().size(), 1);
+	}
+	
+	@Test
+	public void testAddBookInvalid() {
+		final Course courseMock = context.mock(Course.class);
+		Student student = new Student(courseMock);
+		
+		final Book bookMock = context.mock(Book.class);
+		
+		context.checking(new Expectations() {{
+            oneOf (bookMock).getStatus();
+            will(returnValue("Emprestado"));
+        }});
+		
+		student.addBook(bookMock);
+		assertTrue(student.getBooks().isEmpty());
+	}
+	
+	@Test
+	public void testReturnBook() {
+		final Course courseMock = context.mock(Course.class);
+		Student student = new Student(courseMock);
+		
+		final Book bookMock = context.mock(Book.class);
+		
+		context.checking(new Expectations() {{
+            oneOf (bookMock).getStatus();
+            will(returnValue("Disponível"));
+        }});
+		
+		student.addBook(bookMock);
+		student.returnBook(bookMock);
+		
+		assertEquals(student.getBooks().size(), 0);
+	}
 }

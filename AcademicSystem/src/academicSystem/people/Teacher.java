@@ -43,12 +43,16 @@ public class Teacher extends Employee implements BookInterface, DisciplineInterf
 	}
 
 	@Override
-	public void getBooks(List<Book> books) {
-		
+	public List<Book> getBooks() {
+		return null;
 	}
 
 	@Override
-	public void returnBooks(List<Book> books) {
+	public void addBook(Book book) {
+		
+	}
+	@Override
+	public void returnBook(Book returnBook) {
 		
 	}
 }

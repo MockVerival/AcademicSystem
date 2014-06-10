@@ -3,11 +3,13 @@ package academicSystem.people;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import academicSystem.course.Course;
@@ -26,6 +28,8 @@ public class Student extends Person implements BookInterface, DisciplineInterfac
 	protected Course course;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "students")
 	protected List<Discipline> disciplines = new ArrayList<>();
+	@OneToMany(mappedBy = "course", targetEntity = Discipline.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	protected List<Book> books = new ArrayList<>();
 	
 	public Student(Course course) {
 		super();
@@ -53,13 +57,28 @@ public class Student extends Person implements BookInterface, DisciplineInterfac
 	}
 	
 	@Override
-	public void getBooks(List<Book> books) {
-		
+	public List<Book> getBooks() {
+		return this.books;
 	}
 
 	@Override
-	public void returnBooks(List<Book> books) {
-		
+	public void addBook(Book book) {
+		if(book.getStatus().equals("Disponível"))
+			this.books.add(book);
+		else
+			System.out.println("Livro não está disponível!");
+	}
+	
+	@Override
+	public void returnBook(Book returnBook) {
+		int i = 0;
+		for(Book book : this.books) {
+			if(book == returnBook) {
+				this.books.remove(i);
+				break;
+			}
+			i++;
+		}
 	}
 
 	@Override
