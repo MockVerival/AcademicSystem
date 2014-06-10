@@ -29,6 +29,7 @@ public class CourseTest {
 		
 		Discipline disciplineMock = EasyMock.createMock(Discipline.class);
 		EasyMock.expect(disciplineMock.getCredits()).andReturn(4);
+		EasyMock.replay(disciplineMock);
 		
 		course.addDiscipline(disciplineMock);
 		assertEquals(course.getDisciplines().size(), 1);
@@ -40,10 +41,10 @@ public class CourseTest {
 		
 		Discipline disciplineMock = EasyMock.createMock(Discipline.class);
 		EasyMock.expect(disciplineMock.getCredits()).andReturn(5);
+		EasyMock.replay(disciplineMock);
 
 		course.addDiscipline(disciplineMock);
-		//OBS: assertFalse or assertTrue???
-		assertFalse(course.getDisciplines().isEmpty());
+		assertTrue(course.getDisciplines().isEmpty());
 	}
 
 	@Test
@@ -51,12 +52,12 @@ public class CourseTest {
 		Course course = new Course(0, 4);
 		
 		final Student studentMock = EasyMock.createMock(Student.class);
-		EasyMock.expect(studentMock.getName()).andReturn("StudentTest");
-
+		EasyMock.expect(studentMock.getCreditsCoursed()).andReturn(5);
+		EasyMock.replay(studentMock);
+		
 		course.addStudent(studentMock);
 		assertEquals(course.getStudents().size(), 1);
 		
-		assertEquals(course.getStudents().get(0).getName(), "StudentTest");
+		assertEquals(course.getStudents().get(0).getCreditsCoursed(), 5);
 	}
-
 }
